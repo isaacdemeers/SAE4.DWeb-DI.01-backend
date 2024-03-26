@@ -1,0 +1,5 @@
+.DS_store
+frontend/node_modules
+backend/vendor
+backend/bundles
+backend/public/bundles
