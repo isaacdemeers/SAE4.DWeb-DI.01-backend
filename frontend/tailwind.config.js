@@ -20,6 +20,8 @@ export default {
       },
 
     },
+    extend: {},
   },
   plugins: [],
 };
+

@@ -14,7 +14,7 @@ export default function Preview({ movie }) {
         <img className='rounded-b-[50%]' src={`../public/assets/moviesImg/${movie['imgBig']}`} alt="" />
       </div>
       <nav>
-        <div className='flex align-middle justify-between w-full px-2 -translate-y-10 '>
+        <div className='flex align-middle justify-between w-full px-2 -translate-y-10'>
 
           <Button type="action" style="none" text="" icon='infosIcon' ></Button>
           <Button type="action" style="none" imgAdditionalStyles="w-[100px] h-[100px]" text="" icon='playIcon-big' ></Button>
