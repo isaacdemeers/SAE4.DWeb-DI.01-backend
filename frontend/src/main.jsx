@@ -11,11 +11,13 @@ import './index.css';
 // ROUTES
 import Root from './routes/root.jsx';
 import Content from './routes/content.jsx';
+import PlayerPage, { loader as loaderPlayerPage } from './routes/playerPage.jsx';
+
 
 
 // UI
-import Catalogue from './ui/Card/';
-import ErrorPage from './ui/ErrorPage/index.jsx';
+import Catalogue from './ui/Card';
+import ErrorPage from './ui/ErrorPage';
 
 
 
@@ -122,7 +124,6 @@ import ErrorPage from './ui/ErrorPage/index.jsx';
 // }
 
 let data = await fetchApiData();
-console.log(data);
 
 
 const router = createBrowserRouter([
@@ -136,7 +137,17 @@ const router = createBrowserRouter([
         element: <Content data={data} />,
         // loader: buyLoader,
 
+
       },
+
+      {
+        path: 'viewmovie/:movieName',
+        element: <PlayerPage />,
+        // loader: loaderPlayerPage()
+        loader: async ({ params }) => {
+          return loaderPlayerPage({ params });
+        },
+      }
       // {
       //   path: 'about',
       //   element: <About />
@@ -157,7 +168,6 @@ const router = createBrowserRouter([
 
 const rootElement = document.querySelector('#root');
 
-console.log(await fetchApiData());
 
 if (rootElement) {
   ReactDOM.createRoot(document.querySelector('#root')).render(
