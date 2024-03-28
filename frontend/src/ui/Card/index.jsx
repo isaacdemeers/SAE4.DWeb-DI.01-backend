@@ -3,25 +3,24 @@ import Card from "./Card.jsx";
 
 export default function Catalogue({ catalogue, name }) {
 
-  console.log(catalogue);
 
   let movies = [];
   for (let elt of catalogue) {
     movies.push(
-      <li id={'movieID-' + elt.id}>
+      <li className="">
         <Card data={elt} />
       </li>
     );
   }
   return (
 
-    <section className="flex flex-col p-5 mt-16 ">
+    <section className="flex flex-col p-5 mt-20 ">
 
-      <div className="b">
-        <h2 className="font-semibold mx-5 text-white">{name}<span className=" text-primary">Bay</span></h2>
+      <div className="">
+        <h2 className="font-semibold text-2xl mx-5 text-white">{name}<span className=" text-primary">Bay</span></h2>
       </div>
 
-      <ul className="flex align-middle justify-start overflow-scroll p-5 gap-5">
+      <ul className="flex align-middle justify-start rounded-3xl overflow-scroll px-5 py-14 gap-5">
         {movies}
       </ul>
 
