@@ -29,6 +29,8 @@ class MovieCrudController extends AbstractCrudController
        yield NumberField::new('pegi');
        yield TextField::new('imgName');
        yield TextField::new('embedLink');
+       yield NumberField::new('featured');
+
 
 
 

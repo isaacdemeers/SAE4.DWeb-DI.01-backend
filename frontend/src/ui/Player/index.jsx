@@ -47,7 +47,7 @@ export default function Player({ movie }) {
           <figcaption className="text-[.6rem] text-[slategray] w-full mb-4">{movie['description'].replace('<div>', '').replace('</div>', '')}</figcaption>
 
           <div className="flex items-center justify-between">
-            <Button type="action" link="gggggg" style="primary" text="Add" icon='addIcon'></Button>
+            <Button type="action" link="gggggg" style="noPad" text="Add" icon='addIcon'></Button>
 
 
           </div>

@@ -44,6 +44,9 @@ class Movie
     #[ORM\Column(length: 255)]
     private ?string $embedLink = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $featured = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -168,4 +171,18 @@ class Movie
 
         return $this;
     }
+
+    public function getFeatured(): ?int
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(?int $featured): static
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
+    
 }

@@ -9,7 +9,7 @@ import Button from "../Button";
 export default function Preview({ movie }) {
 
   return (
-    <section className=''>
+    <section className='h-screen w-screen'>
       <div>
         <img className='rounded-b-[50%]' src={`../public/assets/moviesImg/${movie['imgBig']}`} alt="" />
       </div>
@@ -23,7 +23,7 @@ export default function Preview({ movie }) {
 
         </div>
         <div className='flex flex-col align-middle justify-center gap-3 -translate-y-8'>
-          <p className='text-white font-medium m-auto w-full text-center'>{movie['title']}</p>
+          <p className='text-white font-medium m-auto w-full uppercase text-center'>{movie['title']}</p>
           <ul className='flex align-middle justify-center gap-3'>
             <Tag text={movie['age']}></Tag>
             <Tag text={movie['categorie']}></Tag>

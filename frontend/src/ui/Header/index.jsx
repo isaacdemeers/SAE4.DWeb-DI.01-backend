@@ -2,9 +2,15 @@ import { Link } from 'react-router-dom';
 
 import Button from '../Button/index.jsx';
 
-export default function Header() {
+let createCategory = function (categoryies) {
+  return categoryies.map((category, index) => {
+    return <option key={index} value={category['id']}>{category['name']}</option>
+  })
+}
+
+export default function Header({ categories }) {
   return (
-    <nav className="bg-black bg-opacity-60 flex absolute md:fixed top-0 z-40 w-full justify-between p-4">
+    <nav className="bg-black bg-opacity-60 backdrop-blur-lg flex absolute md:fixed top-0 z-40 w-full justify-between p-4">
       <div className="flex items-center gap-4 md:gap-8">
         <Link to={'/'}>
           <img className='w-6' src="assets/icons/logo.png" alt="" />
@@ -24,17 +30,10 @@ export default function Header() {
         </Link>
       </div>
       <div className="flex items-center gap-4">
-        <div className='cursor-pointer'><img src="assets/icons/search.svg" alt="" /></div>
+        <Link to={'/searchMovies/all'} className='cursor-pointer'><img src="assets/icons/search.svg" alt="" /></Link>
         <select className='text-sm hidden md:block p-1 rounded-md' name="bay" id="bay">
-          <option value="all">All Bays</option>
-          <option value="action">Action</option>
-          <option value="adventure">Adventure</option>
-          <option value="comedy">Comedy</option>
-          <option value="drama">Drama</option>
-          <option value="fantasy">Fantasy</option>
-          <option value="horror">Horror</option>
-          <option value="romance">Romance</option>
-          <option value="sci-fi">Sci-Fi</option>
+          <option value="all">All</option>
+          {createCategory(categories)}
         </select>
         <Button type={''} style={'live'} text={'• LIVE'} />
         <Button type={''} style={'blackBordered'} text={'Become A Member'} />

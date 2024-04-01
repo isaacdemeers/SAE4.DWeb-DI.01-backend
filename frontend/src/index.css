@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  font-family: "Nunito", sans-serif;
+}
+
 @layer base {
   :root {
 
@@ -17,18 +23,6 @@
 
 body {
   background-color: hsl(var(--dark));
-}
-
-.cardPreview {
-  scale: 0.5;
-  visibility: hidden;
-}
-
-.card:hover>.cardPreview {
-  opacity: 1;
-  scale: .8;
-  visibility: visible;
-
 }
 
 /* .cardPreview {
@@ -74,3 +68,17 @@ body {
   gap: 1rem;
 
 } */
+
+.cardPreview {
+  scale: 0.5;
+  visibility: hidden;
+  /* 60 % d'opacité */
+  background-color: rgba(25, 25, 26, 0.717);
+
+}
+
+.card:hover>.cardPreview {
+  opacity: 1;
+  scale: .8;
+  visibility: visible;
+}

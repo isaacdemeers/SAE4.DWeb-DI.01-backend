@@ -49,21 +49,74 @@ class ApiController extends AbstractController
       return $response;
     }
 
-    #[Route('/api/category/{id}', name: 'app_api_category')]
-    public function readCategory(Category $cat, SerializerInterface $serializer ): Response
+    #[Route('/api/categories', name: 'app_api_categories')]
+    public function readCategories(SerializerInterface $serializer ): Response
+    {
+      $categories = $this->entityManager->getRepository(Category::class)->findAll();
+      $data = $serializer->normalize($categories, null, ['groups' => 'json_category']);
+      $response = new JsonResponse( $data );
+      return $response;
+    }
+
+
+    #[Route('/api/categories/{id}', name: 'app_api_categories_by_id')]
+    public function readCategoriesById(Category $cat, SerializerInterface $serializer ): Response
     {
       $data = $serializer->normalize($cat, null, ['groups' => 'json_category']);
       $response = new JsonResponse( $data );
       return $response;
     }
 
-    #[Route('/api/watchlist/{id}', name: 'app_api_category')]
-    public function readWatchlist(Category $cat, SerializerInterface $serializer ): Response
+    #[Route('/api/featured/', name: 'app_api_featured')]
+    public function readFeatured(SerializerInterface $serializer ): Response
     {
-      $data = $serializer->normalize($cat, null, ['groups' => 'json_category']);
+      $movies = $this->entityManager->getRepository(Movie::class)->findAll();
+      $data = $serializer->normalize($movies, null, ['groups' => 'json_movie']);
+      $response = new JsonResponse( $data );
+
+      // // return seulement le film qui a featured = 1
+      $featured = [];
+      foreach ($movies as $movie) {
+        if ($movie->getFeatured() == 1) {
+          $featured[] = $movie;
+        }
+      }
+      $data = $serializer->normalize($featured, null, ['groups' => 'json_movie']);
+      $response = new JsonResponse( $data );
+      
+      return $response;
+      
+
+
+    }
+    
+
+    #[Route('/api/searchMovies/{text}', name: 'app_api_search')]
+    public function searchMovie($text, SerializerInterface $serializer ): Response
+    {
+
+      //si le nom du film inclu le text alors on le retourne
+      $movies = $this->entityManager->getRepository(Movie::class)->findAll();
+      $searched = [];
+      $text = strtolower($text);
+
+      if ($text == 'all') {
+        $data = $serializer->normalize($movies, null, ['groups' => 'json_movie']);
+        $response = new JsonResponse( $data );
+        return $response;
+      }
+
+      foreach ($movies as $movie) {
+        if (strpos(strtolower($movie->getName()), $text) !== false) {
+          $searched[] = $movie;
+        }
+      }
+      $data = $serializer->normalize($searched, null, ['groups' => 'json_movie']);
       $response = new JsonResponse( $data );
       return $response;
+      
     }
+
 
     
 
