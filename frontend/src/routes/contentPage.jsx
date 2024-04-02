@@ -14,6 +14,14 @@ export async function loader() {
   return [data, featured];
 }
 
+let filter = (data, name) => {
+  return data.filter((movie) => {
+    return movie.category.some((category) => {
+      return category.name === name;
+    });
+  });
+}
+
 export default function ContentPage() {
   let data = useLoaderData();
   return (
@@ -22,7 +30,10 @@ export default function ContentPage() {
         <Featured movie={data[1][0]} />
 
         <Catalogue catalogue={data[0]} name={'Latest'} />
-        <Catalogue catalogue={data[0]} name={'Latest'} />
+        <Catalogue catalogue={filter(data[0], 'Action')} name={'Action'} />
+        <Catalogue catalogue={filter(data[0], 'Adventure')} name={'Adventure'} />
+
+        <Catalogue catalogue={filter(data[0], 'Thriller')} name={'Thriller'} />
 
       </section>
 
