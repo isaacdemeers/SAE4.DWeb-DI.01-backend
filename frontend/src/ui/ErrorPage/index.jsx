@@ -7,9 +7,9 @@ export default function ErrorPage() {
   return (
     <div className="flex flex-col justify-center items-center h-svh">
       <p className="text-6xl font-light">🙂</p>
-      <h1 className="text-6xl font-bold">Ratio</h1>
+      <h1 className="text-6xl font-bold text-white">Ooups</h1>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i className="text-white">{error.statusText || error.message}</i>
       </p>
     </div>
   );

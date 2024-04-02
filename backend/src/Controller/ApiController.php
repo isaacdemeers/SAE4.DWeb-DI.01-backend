@@ -56,6 +56,29 @@ class ApiController extends AbstractController
       $response = new JsonResponse( $data );
       return $response;
     }
+    #[Route('/api/moviesBycategories/{ids}', name: 'app_api_movies_by_categories_ids')]
+    public function readMoviesByCategoriesIds($ids, SerializerInterface $serializer ): Response
+    {
+      // Convertir les IDs en tableau
+      $ids = json_decode($ids);
+
+      $movies = $this->entityManager->getRepository(Movie::class)->findAll();
+      $moviesByCategories = [];
+      foreach ($movies as $movie) {
+        $categories = $movie->getCategory();
+        foreach ($categories as $category) {
+          if (in_array($category->getId(), $ids)) {
+            $moviesByCategories[] = $movie;
+            break;
+          }
+        }
+      }
+
+      $data = $serializer->normalize($moviesByCategories, null, ['groups' => 'json_movie']);
+      $response = new JsonResponse( $data );
+      return $response;
+    }
+        
 
     #[Route('/api/watchlist/{id}', name: 'app_api_category')]
     public function readWatchlist(Category $cat, SerializerInterface $serializer ): Response

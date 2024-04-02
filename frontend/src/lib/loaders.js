@@ -1,5 +1,6 @@
 import { fakeNetwork } from './utils.js';
 
+<<<<<<< Updated upstream
 export async function fetchOurTeams(teamName) {
     await fakeNetwork();
     let answer = await fetch('/src/lib/data/teams-data.json');
@@ -28,6 +29,9 @@ export async function fetchPricingData() {
 }
 
 export async function fetchApiData() {
+=======
+export async function fetchMovies() {
+>>>>>>> Stashed changes
     let answer = await fetch('http://localhost:8080/api/movies');
     let data = await answer.json();
     return data;
@@ -38,4 +42,41 @@ export async function fetchMovie(id) {
     let data = await answer.json();
     return data;
 
+<<<<<<< Updated upstream
+=======
+}
+
+export async function fetchCategories() {
+    let answer = await fetch('http://localhost:8080/api/categories/');
+    let data = await answer.json();
+    return data;
+
+}
+
+export async function fetchFeatured() {
+    let answer = await fetch('http://localhost:8080/api/featured');
+    let data = await answer.json();
+    return data;
+
+}
+
+export async function fetchResults(value) {
+    // si le type
+    let url = 'http://localhost:8080/api/';
+    //si le type de value est une liste
+    if (value.includes(',')) {
+        url += 'moviesBycategories/' + value;
+        let answer = await fetch(url);
+        let data = await answer.json();
+        console.log(data);
+        return data;
+    } else {
+        url += 'searchMovies/' + value;
+        let answer = await fetch(url);
+        let data = await answer.json();
+        return data;
+    }
+
+
+>>>>>>> Stashed changes
 }
