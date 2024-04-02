@@ -11,7 +11,6 @@ export default function Result({ results }) {
   if (results.length === 0) {
     return (
       <section className='flex flex-col align-top mt-§ p-10 justify-start w-full h-80'>
-        <Button className='' type="link" link="movies" style="back" text="Back" icon='arrowLeft'></Button>
         <h4 className='text-white w-full text-center mt-10 text-4xl'>No results found</h4>
       </section>
     )
