@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { cn } from './lib/utils.js';
+import { redirect } from "react-router-dom";
 
 // CSS
 import './index.css';
@@ -12,7 +13,10 @@ import RootPage, { loader as loaderRootPage } from './routes/rootPage.jsx';
 import PlayerPage, { loader as loaderPlayerPage } from './routes/playerPage.jsx';
 import ContentPage, { loader as loaderContentPage } from './routes/contentPage.jsx';
 import ResultPage, { loader as loaderResultPage } from './routes/resultPage.jsx';
+import LoginPage, { loader as loaderLoginPage } from './routes/loginPage.jsx';
 
+
+import getUser from './lib/loaders.js';
 
 
 
@@ -27,6 +31,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootPage />,
     loader: async () => {
+      const user = await getUser();
+      if (!user) {
+        return redirect("http://localhost:8080/login");
+      }
       return loaderRootPage();
     },
     errorElement: <ErrorPage />,
@@ -38,6 +46,7 @@ const router = createBrowserRouter([
           return loaderContentPage();
         },
       },
+
 
       {
         path: 'searchMovies/:text',
@@ -53,7 +62,14 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           return loaderPlayerPage({ params });
         },
-      }
+      },
+
+      {
+        path: 'login',
+        element: <LoginPage />,
+
+      },
+
       // {
       //   path: 'about',
       //   element: <About />

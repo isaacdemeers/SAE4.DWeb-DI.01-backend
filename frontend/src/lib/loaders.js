@@ -78,3 +78,12 @@ export async function fetchResults(value) {
 
 
 }
+
+
+
+export default async function getUser() {
+    // let data = await fetch('http://localhost:8080/user');
+    // let answer = await data.json();
+    // console.log(answer);
+    return 'answer';
+};

@@ -10,7 +10,7 @@ let createCategory = function (categoryies) {
 
 export default function Header({ categories }) {
   return (
-    <nav className="bg-black bg-opacity-60 backdrop-blur-lg flex absolute md:fixed top-0 z-40 w-full justify-between p-4">
+    <nav className="bg-black bg-opacity-60 backdrop-blur-lg flex absolute md:fixed top-0 z-[100] w-full justify-between p-4">
       <div className="flex items-center gap-4 md:gap-8">
         <Link to={'/'}>
           <img className='w-6' src="assets/icons/logo.png" alt="" />

@@ -4,12 +4,16 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface; 
 use App\Entity\Movie;
 use App\Entity\Category;
+use App\Entity\User;
+
 
 
 class ApiController extends AbstractController
@@ -140,8 +144,31 @@ class ApiController extends AbstractController
       
     }
 
+    
+    // #[Route('/user', name: 'app_api_user')]
+    // public function getConnectedUser(): Response
+    // {
+    //     // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    //     /** @var \App\Entity\User $user */
+    //     $user = $this->getUser();
+
+    //     if (!$user instanceof User) {
+    //       return new Response(json_encode(''));
+    //     }
+    //     else {
+    //       $payload = [
+    //           'email' => $user->getEmail(),
+    //           'roles' => $user->getRoles(),
+    //       ];
+          
+    //       return new Response(json_encode($payload));
+    //     }
+ 
+    // }
 
     
-
-
 }
+
+
+
+

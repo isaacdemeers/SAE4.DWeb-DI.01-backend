@@ -21,3 +21,4 @@ export async function fakeNetwork(key) {
     setTimeout(res, Math.random() * 3000);
   });
 }
+
