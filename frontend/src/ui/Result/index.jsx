@@ -25,7 +25,7 @@ export default function Result({ results }) {
 
   return (
     <>
-      <section className='flex flex-col align-top mt-5 p-10 justify-start w-full h-80'>
+      <section className='flex flex-col align-top mt-5 mb-20 p-10 justify-start w-full h-80'>
 
         <h4 className='text-white mt-10 text-4xl'>Results</h4>
 

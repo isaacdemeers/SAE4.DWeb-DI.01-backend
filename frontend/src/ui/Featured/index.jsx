@@ -19,7 +19,7 @@ export default function Featured({ movie }) {
     <section className=' w-screen h-[40vh] md:h-screen relative'>
       <div className=' relative h-full w-full flex align-middle justify-center '>
         <iframe className="  w-full rounded-b-[50%] md:rounded-none border-[none]" src={`https://www.youtube.com/embed/${movie['embedLink']};controls=0`} title=" YouTube video player" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"></iframe>
-        <div className="bg-gradient-to-t from-[#19191a] absolute w-full h-full hidden md:block"></div>
+        <div className="bg-gradient-to-t from-dark absolute w-full h-full hidden md:block"></div>
       </div>
 
       <nav className="-translate-y-20">

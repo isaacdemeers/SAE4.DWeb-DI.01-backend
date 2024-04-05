@@ -13,7 +13,9 @@ import RootPage, { loader as loaderRootPage } from './routes/rootPage.jsx';
 import PlayerPage, { loader as loaderPlayerPage } from './routes/playerPage.jsx';
 import ContentPage, { loader as loaderContentPage } from './routes/contentPage.jsx';
 import ResultPage, { loader as loaderResultPage } from './routes/resultPage.jsx';
-import LoginPage, { loader as loaderLoginPage } from './routes/loginPage.jsx';
+import WatchListPage, { loader as loaderWatchListPage } from './routes/watchListPage.jsx';
+import UserPage, { loader as loaderUserPage } from './routes/UserPage.jsx';
+
 
 
 import getUser from './lib/loaders.js';
@@ -31,10 +33,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootPage />,
     loader: async () => {
-      const user = await getUser();
-      if (!user) {
-        return redirect("http://localhost:8080/login");
-      }
+      // const user = await getUser();
+      // if (!user) {
+      //   return redirect("http://localhost:8080/login");
+      // }
       return loaderRootPage();
     },
     errorElement: <ErrorPage />,
@@ -60,29 +62,39 @@ const router = createBrowserRouter([
         path: 'viewmovie/:movieName',
         element: <PlayerPage />,
         loader: async ({ params }) => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
           return loaderPlayerPage({ params });
         },
       },
 
       {
-        path: 'login',
-        element: <LoginPage />,
-
+        path: 'watchList',
+        element: <WatchListPage />,
+        loader: async () => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
+          return loaderWatchListPage();
+        },
       },
 
-      // {
-      //   path: 'about',
-      //   element: <About />
-      // },
-      // {
-      //   path: 'team/:teamName',
-      //   element: <OurTeams />,
-      //   loader: async ({ params }) => {
-      //     return ourTeamsLoader({ params });
-      //   },
+      {
+        path: 'user/:section',
+        element: <UserPage />,
+        loader: async ({ params }) => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
+          return loaderUserPage({ params });
 
-      // },
+        },
 
+      },
     ]
   }
 

@@ -1,17 +1,22 @@
 
 import { useLoaderData } from 'react-router-dom';
-import { fetchMovies, fetchFeatured } from '../lib/loaders';
+import getUser, { fetchMovies, fetchFeatured, fetchwatchList } from '../lib/loaders';
 
 import Catalogue from '../ui/Card';
 import Featured from '../ui/Featured/';
 import Preview from '../ui/Preview/';
+import WatchList from '../ui/WatchList';
+
 
 
 
 export async function loader() {
   let data = await fetchMovies();
   let featured = await fetchFeatured();
-  return [data, featured];
+  let watchlist = await fetchwatchList();
+  let user = getUser();
+
+  return [data, featured, watchlist];
 }
 
 let filter = (data, name) => {
@@ -30,6 +35,8 @@ export default function ContentPage() {
         <Featured movie={data[1][0]} />
 
         <Catalogue catalogue={data[0]} name={'Latest'} />
+        <WatchList catalogue={data[2]} name={'WatchList'} />
+
         <Catalogue catalogue={filter(data[0], 'Action')} name={'Action'} />
         <Catalogue catalogue={filter(data[0], 'Adventure')} name={'Adventure'} />
 

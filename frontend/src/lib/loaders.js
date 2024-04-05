@@ -1,25 +1,12 @@
 import { fakeNetwork } from './utils.js';
 
-export async function fetchOurTeams(teamName) {
-    await fakeNetwork();
-    let answer = await fetch('/src/lib/data/teams-data.json');
-    let data = await answer.json();
-    return data[teamName];
-}
+// export async function fetchOurTeams(teamName) {
+//     await fakeNetwork();
+//     let answer = await fetch('/src/lib/data/teams-data.json');
+//     let data = await answer.json();
+//     return data[teamName];
+// }
 
-export async function fetchTestimonialData(teamName) {
-    let answer = await fetch('/src/lib/data/testimonial-data.json');
-    let data = await answer.json();
-    data = data[teamName];
-    // choose 3 random testimonies
-    let testimonies = [];
-    for (let i = 0; i < 3; i++) {
-        let index = Math.floor(Math.random() * data.length); // random index
-        testimonies.push(data[index]); // add to testimonies
-        data.splice(index, 1); // remove from data to avoid duplicates
-    }
-    return testimonies;
-}
 
 export async function fetchPricingData() {
     let answer = await fetch('/src/lib/data/pricing-data.json');
@@ -79,11 +66,47 @@ export async function fetchResults(value) {
 
 }
 
+export async function fetchwatchList() {
+    let user = await getUser();
+    let answer = await fetch('http://localhost:8080/api/watchList/' + user.id, {
+        credentials: 'include',
+        mode: 'cors',
+    });
+    let watchlist = await answer.json();
+
+    let movies = await fetchMovies();
+
+    if (watchlist) {
+        let watchlistMovies = [];
+        for (let i = 0; i < watchlist.movies.length; i++) {
+            for (let j = 0; j < movies.length; j++) {
+                if (watchlist.movies[i].id === movies[j].id) {
+                    watchlistMovies.push(movies[j]);
+                }
+            }
+        }
+        return watchlistMovies;
+    }
+    return []
+
+}
+
+export async function addMovieToWatchlist(movieId) {
+    let data = await fetch('http://localhost:8080/api/watchList/add/' + movieId, {
+        credentials: 'include',
+        mode: 'cors',
+    });
+    let answer = await data.json();
+    return answer;
+};
+
 
 
 export default async function getUser() {
-    // let data = await fetch('http://localhost:8080/user');
-    // let answer = await data.json();
-    // console.log(answer);
-    return 'answer';
+    let data = await fetch('http://localhost:8080/user', {
+        credentials: 'include',
+        mode: 'cors',
+    });
+    let answer = await data.json();
+    return answer;
 };

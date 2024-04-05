@@ -1,7 +1,7 @@
-import Card from "./Card.jsx";
+import Card from "../Card/Card.jsx";
 
 
-export default function Catalogue({ catalogue, name }) {
+export default function WatchList({ catalogue, name, style }) {
 
   let movies = [];
   for (let elt of catalogue) {
@@ -11,12 +11,19 @@ export default function Catalogue({ catalogue, name }) {
       </li>
     );
   }
+
+  let styles = {
+    'WatchList': 'mb-20 mt-32 md:mt-[-8rem]',
+    'WatchListPage': '',
+  }
+  if (!style) style = 'WatchList';
   return (
 
-    <section className="flex flex-col md:mb-20 p-5 mt-32 md:mt-[-8rem]">
+
+    <section className={`flex flex-col p-5 ${styles[style]}`}>
 
       <div className=" z-30">
-        <h2 className="font-semibold text-2xl mx-5 text-white">{name}<span className=" text-primary">Bay</span></h2>
+        <h2 className="font-semibold text-2xl mx-5 text-white">{name}</h2>
       </div>
 
       <ul className="flex align-middle justify-start rounded-3xl overflow-scroll px-5 py-14 gap-5">

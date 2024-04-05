@@ -22,7 +22,7 @@ export default function NavBar() {
           </Link>
         </li>
         <li className=" cursor-pointer flex flex-col items-center justify-center text-[.4rem]">
-          <Link to={'/user'} className='flex flex-col items-center'>
+          <Link to={'/user/profile'} className='flex flex-col items-center'>
             <img src="assets/icons/user-circle.svg" alt="" />
             <span>Profile</span>
           </Link>

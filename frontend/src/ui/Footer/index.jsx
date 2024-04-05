@@ -8,8 +8,8 @@ function createSection({ name, links }) {
       <h3 className="text-2xl font-bold mb-4">{name}</h3>
       <ul className="space-y-2">
         {links.map((link, index) => (
-          <li key={index}>
-            <Link href="#">{link}</Link>
+          <li className=' cursor-pointer' key={index}>
+            <div>{link}</div>
           </li>
         ))}
       </ul>
@@ -20,7 +20,7 @@ function createSection({ name, links }) {
 function createSocialMediaLink({ name }) {
   return (
     <li className=' shadow-md cursor-pointer flex align-middle justify-center p-2  h-15 w-15 rounded-xl bg-[#212121]'>
-      <img className='w-full' src={`assets/icons/brand-${name}.svg`} alt={name} />
+      <img className='w-full' src={`public/assets/icons/brand-${name}.svg`} alt={name} />
     </li>
   );
 }
@@ -31,7 +31,7 @@ function createApps() {
   for (let i = 1; i < 9; i++) {
     html.push(
       <li className=' cursor-pointer flex align-middle justify-center'>
-        <img className='h-8' src={`assets/icons/apps/${i}.svg`} alt={i} />
+        <img className='h-8' src={`public/assets/icons/apps/${i}.svg`} alt={i} />
       </li>
     );
   }

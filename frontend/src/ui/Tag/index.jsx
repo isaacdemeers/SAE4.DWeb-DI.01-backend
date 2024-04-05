@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 let colors = {
-  primary: 'border-[slategray] text-[slategray]',
+  primary: 'border-light text-light',
   white: 'border-white text-white',
 
 };

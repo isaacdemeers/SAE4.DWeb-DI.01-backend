@@ -12,11 +12,11 @@ export default function Header({ categories }) {
   return (
     <nav className="bg-black bg-opacity-60 backdrop-blur-lg flex absolute md:fixed top-0 z-[100] w-full justify-between p-4">
       <div className="flex items-center gap-4 md:gap-8">
-        <Link to={'/'}>
+        <Link to={'/movies'}>
           <img className='w-6' src="assets/icons/logo.png" alt="" />
         </Link>
 
-        <Link to={'/'} className="text-white hidden md:block hover:text-gray-300 text-sm" href="#">
+        <Link to={'/movies'} className="text-white hidden md:block hover:text-gray-300 text-sm" href="#">
           Home
         </Link>
         <Link to={'/movies'} className="text-white hover:text-gray-300 text-sm" href="#">
@@ -37,10 +37,7 @@ export default function Header({ categories }) {
         </select>
         <Button type={''} style={'live'} text={'• LIVE'} />
         <Button type={''} style={'blackBordered'} text={'Become A Member'} />
-        <Link to={'/account'} className='cursor-pointer hidden md:visible'><img src="assets/icons/user-circle-width.svg" alt="" /></Link>
-
-
-
+        <Button className='' type="link" link="user/profile" style="noPad" icon='user-circle-width' additionalStyles={'hidden md:block'}></Button>
 
       </div>
     </nav>
