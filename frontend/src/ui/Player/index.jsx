@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from "../Button";
 import Tag from "../Tag";
+import Back from '../Back';
 
 function createCategoryList(categories) {
   let categoryList = [];
@@ -16,20 +17,18 @@ function createCategoryList(categories) {
 
 
 export default function Player({ movie }) {
-  console.log(movie)
 
   return (
-    <section className=' relative mb-20 mt-24 md:m-10 md:mt-24 '>
-      <Button className='md:mt-32' type="link" link="movies" style="primary" text="Back" icon='arrowLeft'></Button>
-
-      <div className=' h-[50vh] mt-10 flex align-middle justify-center'>
+    <section className=' relative mb-20 mt-24  md:mt-24 '>
+      <Back />
+      <div className=' md:m-10 h-[50vh] mt-10 flex align-middle justify-center'>
         <iframe className="w-full border-[none] md:rounded-3xl" src={`https://www.youtube.com/embed/${movie['embedLink']};controls=0`} title=" YouTube video player" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"></iframe>
       </div>
 
-      <section className=" top-1/2 p-5 md:rounded-3xl bg-gray-800 mt-10">
+      <section className=" top-1/2 p-5 md:rounded-3xl md:m-10 bg-borders mt-10">
 
         <div className="p-[.6rem]">
-          <figcaption className="text-[6rem] font-bold text-primary text-white overflow-hidden overflow-ellipsis min-w-[200px]">{movie['name']}</figcaption>
+          <figcaption className="text-[6rem] font-bold text-white overflow-hidden overflow-ellipsis min-w-[200px]">{movie['name']}</figcaption>
 
           <ul className="flex items-center justify-start gap-[.4rem] mx-[0] my-[.6rem]">
             <Tag text={movie['year']}></Tag>
@@ -44,13 +43,9 @@ export default function Player({ movie }) {
 
           </ul>
 
-          <figcaption className="text-[.6rem] text-[slategray] w-full mb-4">{movie['description'].replace('<div>', '').replace('</div>', '')}</figcaption>
-
-          <div className="flex items-center justify-between">
-            <Button type="action" link="gggggg" style="primary" text="Add" icon='addIcon'></Button>
+          <figcaption className="text-[.6rem] text-light w-full mb-4">{movie['description'].replace('<div>', '').replace('</div>', '')}</figcaption>
 
 
-          </div>
 
 
         </div>

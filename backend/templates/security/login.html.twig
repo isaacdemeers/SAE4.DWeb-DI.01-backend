@@ -45,6 +45,10 @@
         
     </form>
 
+    <div class="mb-3">
+        <a href="http://localhost:8080/register">Create an account</a>
+    </div>
+
     {% if app.user %}
             <div class="logged mb-3">
                 Vous étes déjà connecté avec l'adresse {{ app.user.userIdentifier }}. <a href="{{ path('app_logout') }}">Se déconnecter</a>

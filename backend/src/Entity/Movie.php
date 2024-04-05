@@ -17,7 +17,7 @@ class Movie
     #[ORM\Id]
    #[ORM\GeneratedValue]
    #[ORM\Column]
-   #[Groups(['json_category'])]
+   #[Groups(['json_category', 'json_watchlist'])]
    private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -44,9 +44,19 @@ class Movie
     #[ORM\Column(length: 255)]
     private ?string $embedLink = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $featured = null;
+
+    #[ORM\ManyToMany(targetEntity: Watchlist::class, mappedBy: 'movies')]
+    private Collection $watchlists;
+
+
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->watchlists = new ArrayCollection();
+        $this->watchLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,4 +178,47 @@ class Movie
 
         return $this;
     }
+
+    public function getFeatured(): ?int
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(?int $featured): static
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Watchlist>
+     */
+    public function getWatchlists(): Collection
+    {
+        return $this->watchlists;
+    }
+
+    public function addWatchlist(Watchlist $watchlist): static
+    {
+        if (!$this->watchlists->contains($watchlist)) {
+            $this->watchlists->add($watchlist);
+            $watchlist->addMovie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWatchlist(Watchlist $watchlist): static
+    {
+        if ($this->watchlists->removeElement($watchlist)) {
+            $watchlist->removeMovie($this);
+        }
+
+        return $this;
+    }
+
+    
+
+    
 }

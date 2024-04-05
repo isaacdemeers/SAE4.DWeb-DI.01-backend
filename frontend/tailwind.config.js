@@ -4,9 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "hsl(var(--red)/<alpha-value>)",
-        secondary: "hsl(var(--gray)/<alpha-value>)",
-        dark: "hsl(var(--dark)/<alpha-value>)",
+        primary: "hsl(var(--primary)/<alpha-value>)",
+        light: "hsl(var(--lighten-bg)/<alpha-value>)",
+        dark: "hsl(var(--bg)/<alpha-value>)",
+        borders: "hsl(var(--borders)/<alpha-value>)",
+
 
       },
       textColor: {},
@@ -20,7 +22,6 @@ export default {
       },
 
     },
-    extend: {},
   },
   plugins: [],
 };

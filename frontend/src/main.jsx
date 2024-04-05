@@ -2,16 +2,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { fetchApiData } from './lib/loaders.js';
 import { cn } from './lib/utils.js';
+import { redirect } from "react-router-dom";
 
 // CSS
 import './index.css';
 
 // ROUTES
-import Root from './routes/root.jsx';
-import Content from './routes/content.jsx';
+import RootPage, { loader as loaderRootPage } from './routes/rootPage.jsx';
 import PlayerPage, { loader as loaderPlayerPage } from './routes/playerPage.jsx';
+import ContentPage, { loader as loaderContentPage } from './routes/contentPage.jsx';
+import ResultPage, { loader as loaderResultPage } from './routes/resultPage.jsx';
+import WatchListPage, { loader as loaderWatchListPage } from './routes/watchListPage.jsx';
+import UserPage, { loader as loaderUserPage } from './routes/UserPage.jsx';
+
+
+
+import getUser, { logout } from './lib/loaders.js';
 
 
 
@@ -21,146 +28,83 @@ import ErrorPage from './ui/ErrorPage';
 
 
 
-// let data = {
-//   0: {
-//     id: 1013,
-//     title: 'The Shawshank Redemption',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '1994',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Drama',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   1: {
-//     id: 103,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   2: {
-//     id: 10323,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   3: {
-//     id: 10343,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   4: {
-//     id: 13203,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   5: {
-//     id: 10543,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   6: {
-//     id: 10223,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   7: {
-//     id: 11103,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-//   8: {
-//     id: 1103,
-//     title: 'The Shawshank KIll',
-//     imgBig: 'm1.png',
-//     embedLink: 'hYHdP89UqTs',
-//     year: '2000',
-//     duration: '2h 22min',
-//     age: '16+',
-//     categorie: 'Sci-Fi',
-//     description: 'Two imprisoned lorem imprisonedimprisonedimpris onedimprisonedimpri sonedimprisonedimpr isonedimprisonedimprisonedimpr isonedimprisoned'
-//   },
-// }
-
-let data = await fetchApiData();
-
-
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <RootPage />,
+    loader: async () => {
+      // const user = await getUser();
+      // if (!user) {
+      //   return redirect("http://localhost:8080/login");
+      // }
+      return loaderRootPage();
+    },
     errorElement: <ErrorPage />,
     children: [
       {
         path: 'movies',
-        element: <Content data={data} />,
-        // loader: buyLoader,
+        element: <ContentPage />,
+        loader: async () => {
+          return loaderContentPage();
+        },
+      },
 
 
+      {
+        path: 'searchMovies/:text',
+        element: <ResultPage />,
+        loader: async ({ params }) => {
+          return loaderResultPage({ params });
+        },
       },
 
       {
         path: 'viewmovie/:movieName',
         element: <PlayerPage />,
-        // loader: loaderPlayerPage()
         loader: async ({ params }) => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
           return loaderPlayerPage({ params });
         },
-      }
-      // {
-      //   path: 'about',
-      //   element: <About />
-      // },
-      // {
-      //   path: 'team/:teamName',
-      //   element: <OurTeams />,
-      //   loader: async ({ params }) => {
-      //     return ourTeamsLoader({ params });
-      //   },
+      },
 
-      // },
+      {
+        path: 'watchList',
+        element: <WatchListPage />,
+        loader: async () => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
+          return loaderWatchListPage();
+        },
+      },
 
+      {
+        path: 'user/:section',
+        element: <UserPage />,
+        loader: async ({ params }) => {
+          const user = await getUser();
+          if (!user) {
+            return redirect("http://localhost:8080/login");
+          }
+          return loaderUserPage({ params });
+
+        },
+
+      },
+
+      {
+        path: 'logout',
+        element: <UserPage />,
+        loader: async () => {
+          await logout();
+          return redirect("/movies");
+        },
+
+      },
     ]
   }
 

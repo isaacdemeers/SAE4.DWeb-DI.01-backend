@@ -13,6 +13,10 @@ use App\Entity\Movie;
 use App\Entity\User;
 
 
+
+
+
+
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]

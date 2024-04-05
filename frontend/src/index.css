@@ -1,34 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+  font-family: "Nunito", sans-serif;
+}
+
 @layer base {
   :root {
 
-    --crl-primary: 355 79% 50%;
-    --crl-bg: 240 2% 10%;
-    --crl-gray: 30 1% 45%;
+    --crl-red: 355 79% 50%;
+    --crl-darkGray-700: 240 2% 10%;
+    --crl-darkGray-600: 240 2% 13%;
+    --crl-gray-400: 30 1% 45%;
 
-    --red: var(--crl-primary);
-    --dark: var(--crl-bg);
-    --gray: var(--crl-gray);
+    --primary: var(--crl-red);
+    --bg: var(--crl-darkGray-700);
+    --lighten-bg: var(--crl-gray-400);
+    --borders: var(--crl-darkGray-600);
   }
 }
 
 body {
-  background-color: hsl(var(--dark));
-}
-
-.cardPreview {
-  scale: 0.5;
-  visibility: hidden;
-}
-
-.card:hover>.cardPreview {
-  opacity: 1;
-  scale: .8;
-  visibility: visible;
-
+  background-color: hsl(var(--bg));
+  color: #e41b2c;
 }
 
 /* .cardPreview {
@@ -74,3 +73,16 @@ body {
   gap: 1rem;
 
 } */
+
+.cardPreview {
+  scale: 0.5;
+  visibility: hidden;
+  opacity: 0;
+
+}
+
+.card:hover>.cardPreview {
+  opacity: 1;
+  scale: .8;
+  visibility: visible;
+}

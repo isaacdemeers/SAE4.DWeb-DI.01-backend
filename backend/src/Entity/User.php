@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Name = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $Age = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $number = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Watchlist $watchlist = null;
+
+
+    public function __construct()
+    {
+        $this->watchLists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,4 +130,80 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(?string $Name): static
+    {
+        $this->Name = $Name;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->Age;
+    }
+
+    public function setAge(?int $Age): static
+    {
+        $this->Age = $Age;
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): static
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Watchlist>
+     */
+    public function getWatchlist(): ?Watchlist
+    {
+        return $this->watchlist;
+    }
+
+    public function setWatchlist(?Watchlist $watchlist): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($watchlist === null && $this->watchlist !== null) {
+            $this->watchlist->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($watchlist !== null && $watchlist->getUser() !== $this) {
+            $watchlist->setUser($this);
+        }
+
+        $this->watchlist = $watchlist;
+
+        return $this;
+    }
+
+  
+
 }
