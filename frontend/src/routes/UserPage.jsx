@@ -20,7 +20,6 @@ export async function loader({ params }) {
 
 export default function UserPage() {
   let data = useLoaderData();
-  console.log(data);
   return (
     <>
       <User user={data[0]} section={data[1]} watchList={data[2]} />

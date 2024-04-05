@@ -27,6 +27,7 @@
 
 body {
   background-color: hsl(var(--bg));
+  color: #e41b2c;
 }
 
 /* .cardPreview {

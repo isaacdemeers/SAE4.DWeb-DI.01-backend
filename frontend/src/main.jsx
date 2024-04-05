@@ -18,7 +18,7 @@ import UserPage, { loader as loaderUserPage } from './routes/UserPage.jsx';
 
 
 
-import getUser from './lib/loaders.js';
+import getUser, { logout } from './lib/loaders.js';
 
 
 
@@ -92,6 +92,16 @@ const router = createBrowserRouter([
           }
           return loaderUserPage({ params });
 
+        },
+
+      },
+
+      {
+        path: 'logout',
+        element: <UserPage />,
+        loader: async () => {
+          await logout();
+          return redirect("/movies");
         },
 
       },

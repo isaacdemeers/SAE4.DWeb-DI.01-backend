@@ -75,13 +75,16 @@ export async function fetchwatchList() {
     let watchlist = await answer.json();
 
     let movies = await fetchMovies();
+    console.log(watchlist);
 
-    if (watchlist) {
+    if (user) {
         let watchlistMovies = [];
-        for (let i = 0; i < watchlist.movies.length; i++) {
-            for (let j = 0; j < movies.length; j++) {
-                if (watchlist.movies[i].id === movies[j].id) {
-                    watchlistMovies.push(movies[j]);
+        if (watchlist.movies) {
+            for (let i = 0; i < watchlist.movies.length; i++) {
+                for (let j = 0; j < movies.length; j++) {
+                    if (watchlist.movies[i].id === movies[j].id) {
+                        watchlistMovies.push(movies[j]);
+                    }
                 }
             }
         }
@@ -100,7 +103,12 @@ export async function addMovieToWatchlist(movieId) {
     return answer;
 };
 
-
+export async function logout() {
+    await fetch('http://localhost:8080/logout', {
+        credentials: 'include',
+        mode: 'cors',
+    });
+};
 
 export default async function getUser() {
     let data = await fetch('http://localhost:8080/user', {

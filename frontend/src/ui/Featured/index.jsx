@@ -27,7 +27,7 @@ export default function Featured({ movie }) {
 
           <Button type="action" style="none" text="" additionalStyles='md:hidden' icon='infosIcon' ></Button>
           <Button type="link" link={`viewMovie/${movie.id}`} style="none" imgAdditionalStyles="w-[100px] h-[100px] md:w-[80px] md:h-[80px]" text="" icon='playIcon-big' ></Button>
-          <Button type="action" style="none" text="" icon='addIcon-big' ></Button>
+          <Button type="" style="none" text="" icon='addIcon-big' ></Button>
 
 
         </div>

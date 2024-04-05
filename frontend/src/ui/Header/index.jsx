@@ -16,22 +16,22 @@ export default function Header({ categories }) {
           <img className='w-6' src="assets/icons/logo.png" alt="" />
         </Link>
 
-        <Link to={'/movies'} className="text-white hidden md:block hover:text-gray-300 text-sm" href="#">
+        <Link to={'/movies'} className="text-white hidden md:block hover:text-primary text-sm" href="#">
           Home
         </Link>
-        <Link to={'/movies'} className="text-white hover:text-gray-300 text-sm" href="#">
+        <Link to={'/movies'} className="text-white hover:text-primary text-sm" href="#">
           Films
         </Link>
-        <Link to={'/movies'} className="text-white  hover:text-gray-300 text-sm" href="#">
+        <Link to={'/movies'} className="text-white  hover:text-primary text-sm" href="#">
           Series
         </Link>
-        <Link to={'/watchlist'} className="text-white hidden md:block hover:text-gray-300 text-sm" href="#">
+        <Link to={'/watchlist'} className="text-white hidden md:block hover:text-primary text-sm" href="#">
           WatchList
         </Link>
       </div>
       <div className="flex items-center gap-4">
         <Link to={'/searchMovies/all'} className='cursor-pointer'><img src="assets/icons/search.svg" alt="" /></Link>
-        <select className='text-sm hidden md:block p-1 rounded-md' name="bay" id="bay">
+        <select className='text-sm text-black hidden md:block p-1 rounded-md' name="bay" id="bay">
           <option value="all">All</option>
           {createCategory(categories)}
         </select>

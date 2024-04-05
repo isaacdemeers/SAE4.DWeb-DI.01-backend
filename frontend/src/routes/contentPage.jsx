@@ -14,9 +14,9 @@ export async function loader() {
   let data = await fetchMovies();
   let featured = await fetchFeatured();
   let watchlist = await fetchwatchList();
-  let user = getUser();
+  let user = await getUser();
 
-  return [data, featured, watchlist];
+  return [data, featured, watchlist, user];
 }
 
 let filter = (data, name) => {
@@ -29,13 +29,25 @@ let filter = (data, name) => {
 
 export default function ContentPage() {
   let data = useLoaderData();
+
+  function isUser() {
+    let user = data[3];
+    if (user && data[2]) {
+      return (
+        <WatchList catalogue={data[2]} name={'WatchList'} />
+
+      )
+    }
+  }
+
   return (
     <>
       <section>
         <Featured movie={data[1][0]} />
 
         <Catalogue catalogue={data[0]} name={'Latest'} />
-        <WatchList catalogue={data[2]} name={'WatchList'} />
+
+        {isUser()}
 
         <Catalogue catalogue={filter(data[0], 'Action')} name={'Action'} />
         <Catalogue catalogue={filter(data[0], 'Adventure')} name={'Adventure'} />
