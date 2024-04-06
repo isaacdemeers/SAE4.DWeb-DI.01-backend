@@ -220,6 +220,34 @@ class ApiController extends AbstractController
       return $response;
     }
 
+    // supprime tous les films de la watchlist un par un avec removeMovie()
+    #[Route('/api/watchList/remove/{userId}',  name: 'app_api_remove_movies_from_watchlist')]
+    public function removeMoviesFromWatchList($userId, SerializerInterface $serializer): Response
+    {
+      // verifier a l'aide des cookies si l'utilisateur est connecté
+      /** @var \App\Entity\User $user */
+      $user = $this->getUser();
+      
+      // verifier si il y as un utilisateur connecté
+      if (!$user instanceof User) {
+        return new JsonResponse(['error' => 'You are not connected']);
+      }
+
+      $user = $this->entityManager->getRepository(User::class)->find($userId);
+      $watchlist = $user->getWatchlist();
+      $movies = $watchlist->getMovies();
+      foreach ($movies as $movie) {
+        $watchlist->removeMovie($movie);
+      }
+      $this->entityManager->persist($watchlist);
+      $this->entityManager->flush();
+      $data = $serializer->normalize($watchlist, null, ['groups' => 'json_watchlist']);
+      $response = new JsonResponse( $data );
+      return $response;
+    }
+    
+
+
 
 
     

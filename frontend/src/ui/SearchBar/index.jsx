@@ -26,7 +26,7 @@ export default function SearchBar() {
 
       <div className='w-full  flex align-middle justify-center  gap-5'>
 
-        <input className='text-sm block w-96 p-2 rounded-md'
+        <input className='text-sm block w-96 text-black p-2 rounded-md'
           type="text"
           value={searchTerm}
           onChange={handleInputChange}
