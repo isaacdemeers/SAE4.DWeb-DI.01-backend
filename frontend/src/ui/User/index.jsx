@@ -2,6 +2,10 @@ import Card from "../Card/Card.jsx";
 import Button from "../Button/";
 import Back from '../Back/';
 import WatchList from '../WatchList/';
+import { Link } from "react-router-dom";
+
+import { removeMovieFromWatchlist } from "../../lib/loaders.js";
+
 
 
 
@@ -57,7 +61,20 @@ export default function User({ user, section, watchList }) {
 
   if (section.section === 'watchlist') {
     content = (
-      <WatchList catalogue={watchList} name="" style="WatchListPage" />
+      <>
+        <WatchList catalogue={watchList} name="" style="WatchListPage" />
+
+        <div className=' flex align-middle justify-start w-full mx-10'>
+          <Link to={'/user/watchlist'} onClick={removeMovieFromWatchlist} >
+            <div className=' hover:bg-borders [transition:all_.3s] rounded-lg px-5 py-3'>
+              Delete my watchlist
+
+            </div>
+          </Link>
+
+        </div>
+
+      </>
     )
   }
 

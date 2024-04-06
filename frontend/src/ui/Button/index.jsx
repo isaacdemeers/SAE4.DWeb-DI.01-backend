@@ -9,12 +9,12 @@ export default function Button({ type, ...props }) {
   //  props.link: string
 
   let styles = {
-    primary: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-[.5rem] px-[.8rem] py-[.5rem] pointer',
+    primary: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-2 px-[.8rem] py-2 pointer',
     blackBordered: 'text-sm cursor-pointer px-3 py-1 rounded-md bg-transparent border-[1px] border-white text-white hover:bg-white hover:text-black',
     live: ' text-sm hidden md:block cursor-pointer rounded-md px-3 py-1 bg-primary text-white',
     none: ' text-sm cursor-pointer rounded-md px-3 py-1 text-white',
-    noPad: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-[.5rem] py-[.5rem]',
-    search: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-[.5rem] py-[.5rem] px-3 rounded-md bg-red-600 bg-primary'
+    noPad: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-2 py-2',
+    search: 'cursor-pointer flex items-center content-left text-[white] text-[1rem] gap-2 py-2 px-3 rounded-md bg-red-600 bg-primary'
 
 
   };

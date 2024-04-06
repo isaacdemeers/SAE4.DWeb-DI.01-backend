@@ -103,6 +103,15 @@ export async function addMovieToWatchlist(movieId) {
     return answer;
 };
 
+
+export async function removeMovieFromWatchlist() {
+    let user = await getUser();
+    await fetch('http://localhost:8080/api/watchList/remove/' + user.id, {
+        credentials: 'include',
+        mode: 'cors',
+    });
+}
+
 export async function logout() {
     await fetch('http://localhost:8080/logout', {
         credentials: 'include',
